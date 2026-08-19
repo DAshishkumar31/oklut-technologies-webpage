@@ -1,0 +1,301 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Typography ─────────────────────────────── */
+  --font-display: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Brand colors ───────────────────────────── */
+  --color-paper: #f6f5f2;
+  --color-paper-soft: #fbfaf8;
+  --color-ink: #0b0f1a;
+  --color-ink-soft: #141a2b;
+  --color-ink-muted: #232b42;
+  --color-muted: #5d6575;
+  --color-line: #e6e3dc;
+  --color-line-dark: #242c45;
+
+  --color-accent: #5b5bef;
+  --color-accent-deep: #4545d8;
+  --color-accent-soft: #eeedfd;
+  --color-violet: #8b5cf6;
+  --color-gold: #e8a33d;
+  --color-mint: #2dd4bf;
+
+  /* ── Shadows ────────────────────────────────── */
+  --shadow-card: 0 1px 2px rgb(11 15 26 / 0.05), 0 10px 28px rgb(11 15 26 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(11 15 26 / 0.05), 0 24px 48px rgb(11 15 26 / 0.12);
+  --shadow-float: 0 12px 32px rgb(11 15 26 / 0.16);
+  --shadow-glow: 0 0 0 1px rgb(91 91 239 / 0.14), 0 16px 48px rgb(91 91 239 / 0.22);
+
+  /* ── Radii ──────────────────────────────────── */
+  --radius-4xl: 2rem;
+
+  /* ── Motion ─────────────────────────────────── */
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-marquee: marquee 34s linear infinite;
+  --animate-spin-3d: spin-3d 26s linear infinite;
+  --animate-spin-3d-slow: spin-3d 22s linear infinite;
+  --animate-spin-y: spin-y 14s linear infinite;
+  --animate-spin-y-slow: spin-y 22s linear infinite;
+  --animate-float: float-y 7s ease-in-out infinite;
+  --animate-float-slow: float-y 9.5s ease-in-out infinite;
+  --animate-beam: beam 9s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 3.2s ease-out infinite;
+  --animate-spin-cw: spin-cw 24s linear infinite;
+  --animate-spin-cw-slow: spin-cw 40s linear infinite;
+  --animate-spin-cw-fast: spin-cw 14s linear infinite;
+  --animate-spin-ccw: spin-ccw 30s linear infinite;
+  --animate-spin-ccw-slow: spin-ccw 52s linear infinite;
+  --animate-stream: data-stream 6s linear infinite;
+  --animate-scan: scan-y 8s ease-in-out infinite;
+  --animate-hud-pulse: hud-pulse 4s ease-in-out infinite;
+  --animate-dash-flow: dash-flow 5s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes spin-3d {
+    from {
+      transform: rotateX(72deg) rotateZ(0deg);
+    }
+    to {
+      transform: rotateX(72deg) rotateZ(360deg);
+    }
+  }
+
+  @keyframes spin-y {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(360deg);
+    }
+  }
+
+  @keyframes float-y {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes spin-cw {
+    to {
+      transform: rotateZ(360deg);
+    }
+  }
+
+  @keyframes spin-ccw {
+    to {
+      transform: rotateZ(-360deg);
+    }
+  }
+
+  @keyframes data-stream {
+    0% {
+      transform: translateY(-140%);
+      opacity: 0;
+    }
+    18% {
+      opacity: 0.7;
+    }
+    82% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(260%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes scan-y {
+    0%,
+    100% {
+      transform: translateY(-40%);
+      opacity: 0;
+    }
+    12% {
+      opacity: 0.5;
+    }
+    55% {
+      transform: translateY(90%);
+      opacity: 0.35;
+    }
+    88% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hud-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.75;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+  }
+
+  @keyframes dash-flow {
+    to {
+      stroke-dashoffset: -240;
+    }
+  }
+
+  @keyframes beam {
+    0%,
+    100% {
+      transform: translateX(-40%) skewX(-18deg);
+      opacity: 0;
+    }
+    14% {
+      opacity: 0.55;
+    }
+    32% {
+      transform: translateX(140%) skewX(-18deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+
+  --animate-typing: typing-dot 1.2s ease-in-out infinite;
+
+  @keyframes typing-dot {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.35;
+    }
+    30% {
+      transform: translateY(-4px);
+      opacity: 1;
+    }
+  }
+}
+
+/* ── Layout helper ─────────────────────────────── */
+@utility container-x {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 40rem) {
+    padding-inline: 2rem;
+  }
+
+  @media (min-width: 64rem) {
+    padding-inline: 3rem;
+  }
+}
+
+/* ── Decorative helpers ────────────────────────── */
+@utility text-gradient {
+  background: linear-gradient(100deg, var(--color-accent), var(--color-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility glass {
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+@utility glass-strong {
+  background: rgb(11 15 26 / 0.72);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+@utility perspective-3d {
+  perspective: 1200px;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@utility chat-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.16) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 0.16);
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ── Base ──────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
