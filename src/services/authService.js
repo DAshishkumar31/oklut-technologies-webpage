@@ -8,6 +8,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const AUTH_ERRORS = {
   INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
+  EMAIL_NOT_CONFIRMED: "EMAIL_NOT_CONFIRMED",
   NETWORK: "NETWORK",
   UNKNOWN: "UNKNOWN",
 };
@@ -16,6 +17,17 @@ function invalidCredentials() {
   const err = new Error("Invalid email or password.");
   err.code = AUTH_ERRORS.INVALID_CREDENTIALS;
   return err;
+}
+
+function mapSupabaseAuthError(error) {
+  const code = error?.code ?? "";
+  const message = error?.message ?? "";
+  if (code === "email_not_confirmed" || /not confirmed|confirm your email/i.test(message)) {
+    const err = new Error("Please confirm your email address before signing in.");
+    err.code = AUTH_ERRORS.EMAIL_NOT_CONFIRMED;
+    return err;
+  }
+  return invalidCredentials();
 }
 
 async function resolveEmail(emailOrId) {
@@ -45,10 +57,14 @@ export async function signInEmployee(emailOrId, password) {
       email,
       password,
     });
-    if (error) throw invalidCredentials();
+    if (error) {
+      console.warn("[AUTH] Supabase sign-in failed:", error?.code ?? "", error?.message);
+      throw mapSupabaseAuthError(error);
+    }
     return data;
   } catch (error) {
     if (error?.code === AUTH_ERRORS.INVALID_CREDENTIALS) throw error;
+    if (error?.code === AUTH_ERRORS.EMAIL_NOT_CONFIRMED) throw error;
     const err = new Error("Unable to reach the authentication service.");
     err.code = AUTH_ERRORS.NETWORK;
     throw err;

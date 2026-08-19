@@ -32,6 +32,8 @@ function errorMessage(code) {
   switch (code) {
     case AUTH_ERRORS.NETWORK:
       return "Unable to reach the authentication service. Check your connection and try again.";
+    case AUTH_ERRORS.EMAIL_NOT_CONFIRMED:
+      return "Your email is not confirmed yet. Check your inbox and click the confirmation link, then try again.";
     default:
       return "Invalid email or password. Please try again.";
   }
