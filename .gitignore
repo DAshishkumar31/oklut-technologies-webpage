@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Supabase CLI local state — never commit
+supabase/.temp/
+
 # Environment / secrets — never commit keys
 .env
 .env.local
